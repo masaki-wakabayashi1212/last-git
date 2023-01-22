@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チェックリストWebページ</title>
+</head>
+
+<style>
+
+    body{
+        font-family: helvetica arial,"BIZ UDPGothic",sans-serif;
+
+    }
+
+    h1{
+    color: white;
+    background-color: deeppink;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 30px;
+    }
+
+  
+    label{
+    font-size: 20px;
+    }
+    
+
+    td,tr{
+        padding: 5px 10px;
+        text-align: center;
+    }
+    
+    div.announcement{
+      text-align: left;
+    }
+
+    div.announcement,
+    div.lostthingsassembly{
+      font-size: 16px;
+      color: red;
+      text-decoration: underline;
+    }
+
+   
+        
+   td input[type=checkbox]{
+        float: left;
+        margin: 0 auto;
+        width: 100%;
+     }
+
+     div.supplement{
+      font-size: 20px;
+      padding-top: 20px;
+      padding-left: 50px;
+     }
+
+    label{
+        line-height: 1.5;
+    }
+
+    table{
+        margin: auto;
+    }
+    
+    
+</style>
+
+<body>
+
+    <h1>last</h1>
+
+    <table border="1">
+
+        <th>チェック</th>
+        <th>時間</th>
+        <th>内容</th>
+
+        <tr>
+            <td>
+              <input type="checkbox" name="check" id="multiMachine">
+            </td>
+            <td>
+              <label class="multiMachine" for="multiMachine">23:00</label>
+            </td>
+            <td>
+              <label class="multiMachine" for="multiMachine">A</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+              <input type="checkbox" name="check" id="announcement">
+            </td>
+            <td>
+              <label class="announcement" for="announcement">23:14</label>
+            </td>
+            <td>
+              <label class="announcement" for="announcement">B</label>
+            </td>
+        </tr>
+
+        <tr>
+          <td>
+            <input type="checkbox" name="check" id="lostthingsassembly">
+          </td>
+          <td>
+            <label class="lostthingsassembly" for="lostthingsassembly">23:20頃</label>
+          </td>
+          <td>
+            <label class="lostthingsassembly" for="lostthingsassembly">C</label>
+          </td>
+        </tr>
+    </table>
+
+    <script>
+
+      //以下のコードで試したものの無反応
+     const chkid = [document.getElementById('multiMachine'),
+                   document.getElementById('announcement')
+                   ];
+
+     const chkclass = [document.getElementsByClassName('multiMachine'),
+                      document.getElementsByClassName('announcement')
+                      ];
+
+    let chkidindex = 0;
+    let chkidlength = chkid.length;
+
+    chkidindex++;
+
+    let chkclassindex = 0;
+    let chkclasslength = chkclass.length
+
+    let chkclasssecondindex = 0;
+    let chkclasssecondlength = chkclass[chkclassindex].length;
+
+    chkclasssecondindex++;
+
+    chkid[chkidindex].addEventListener('click',(e)=>{
+       while(chkclassindex<chkclasslength){
+            if(e.target.checked===true){
+                chkclass[chkclassindex][chkclasssecondindex].style.textDecoration = 'line-through';              
+                chkclass[chkclassindex][chkclasssecondindex].style.color = '#ccc';
+                }else{
+                chkclass[chkclassindex][chkclasssecondindex].style.textDecoration = '';              
+                chkclass[chkclassindex][chkclasssecondindex].style.color = '';
+                }
+                chkclassindex++;
+            }
+        });
+   
+        
+      //以下の大量のwhile文をリファクタリングしたい
+         const chkidfirst = document.getElementById('multiMachine');
+          const chkclassfirst = document.getElementsByClassName('multiMachine');
+          chkidfirst.addEventListener('click',()=>{
+            let classfirstindex=0;
+            let classfirstlength=chkclassfirst.length
+            while(classfirstindex<classfirstlength){
+                if(chkidfirst.checked===true){
+                    chkclassfirst[classfirstindex].style.textDecoration = 'line-through';              
+                    chkclassfirst[classfirstindex].style.color = '#ccc';
+                }else{
+                    chkclassfirst[classfirstindex].style.textDecoration = '';              
+                    chkclassfirst[classfirstindex].style.color = '';
+                }
+                classfirstindex++;
+            }
+        });
+
+        const chkidsecond = document.getElementById('announcement');
+        const chkclasssecond = document.getElementsByClassName('announcement'); 
+
+        chkidsecond.addEventListener('click',()=>{
+            let classsecondindex = 0;
+            let classsecondlength = chkclasssecond.length
+            while(classsecondindex<classsecondlength){
+                if(chkidsecond.checked===true){
+                    chkclasssecond[classsecondindex].style.textDecoration = 'line-through';              
+                    chkclasssecond[classsecondindex].style.color = '#ccc';
+                }else{
+                    chkclasssecond[classsecondindex].style.textDecoration = '';              
+                    chkclasssecond[classsecondindex].style.color = '';
+                    }
+                classsecondindex++;
+                }  
+            });
+   
+    </script>
+</body>
+</html>
